@@ -13,10 +13,8 @@ const handleApiCall = new clarifai.App({
 const db = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'd',
-        password: 'chuck',
-        database: 'facerecognitiondb'
+        connectionString: process.env.DATABASE_URL,
+        ssl: true
     }
 });
 
@@ -28,9 +26,9 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-// app.get('/', (req, res) => {
-//     res.json(database.users)
-// })
+app.get('/', (req, res) => {
+    res.json('WORKING!!!')
+})
 
 app.post('/signin', (req, res) => {
     const { email, password } = req.body
@@ -127,6 +125,6 @@ app.post('/imageurl', (req, res) => {
 //     // res == true
 // });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('app is running on port 3000')
 })
