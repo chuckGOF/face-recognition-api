@@ -14,13 +14,9 @@ const db = knex({
     client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
-        ssl: true
+        ssl: true,
     }
 });
-
-// console.log(db.select('*').from('users').then(data => {
-//     console.log(data)
-// }).catch(err => {console.log(err)}))
 
 const app = express()
 app.use(bodyParser.json())
